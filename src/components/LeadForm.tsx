@@ -66,7 +66,6 @@ export default function LeadForm({ initialService }: LeadFormProps) {
     setSubmitted(true);
     setSubmittedData({ ...formData });
 
-    // Store in localStorage for persistence
     try {
       const existing = JSON.parse(localStorage.getItem('as_inquiries') || '[]');
       existing.push({ ...formData, timestamp: new Date().toISOString() });
@@ -97,7 +96,6 @@ Preferred Contact: ${submittedData.bestTime}`;
   return (
     <section id="challenge-form" className="py-20 bg-slate-900 text-white border-b border-slate-800 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
         <div className="text-center mb-12">
           <p className="text-sm font-semibold tracking-wide text-emerald-400 uppercase">
             Start Your Transformation
@@ -111,7 +109,6 @@ Preferred Contact: ${submittedData.bestTime}`;
         </div>
 
         {submitted && submittedData ? (
-          /* Success Message State */
           <div className="bg-slate-800/95 border border-emerald-500/50 rounded-2xl p-8 sm:p-10 shadow-2xl animate-in fade-in duration-300">
             <div className="text-center space-y-4">
               <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center mx-auto">
@@ -163,7 +160,7 @@ Preferred Contact: ${submittedData.bestTime}`;
                 <button
                   type="button"
                   onClick={handleCopySummary}
-                  className="inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-slate-200 text-sm font-semibold px-4 py-3 rounded-md transition-colors"
+                  className="inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-slate-200 text-sm font-semibold px-4 py-3 rounded-md transition-colors cursor-pointer"
                 >
                   <Copy className="w-4 h-4" />
                   <span>{copied ? 'Summary Copied!' : 'Copy Inquiry Summary'}</span>
@@ -174,7 +171,7 @@ Preferred Contact: ${submittedData.bestTime}`;
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="text-xs text-slate-400 hover:text-white underline"
+                  className="text-xs text-slate-400 hover:text-white underline cursor-pointer"
                 >
                   Edit or submit another challenge
                 </button>
@@ -182,7 +179,6 @@ Preferred Contact: ${submittedData.bestTime}`;
             </div>
           </div>
         ) : (
-          /* Form Fields */
           <form
             onSubmit={handleSubmit}
             className="bg-slate-800/90 border border-slate-700 rounded-2xl p-6 sm:p-10 shadow-2xl space-y-6"
@@ -195,7 +191,6 @@ Preferred Contact: ${submittedData.bestTime}`;
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* 1. Full Name */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                   Full Name <span className="text-emerald-400">*</span>
@@ -210,7 +205,6 @@ Preferred Contact: ${submittedData.bestTime}`;
                 />
               </div>
 
-              {/* 2. Company/Business Name */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                   Company / Business Name <span className="text-emerald-400">*</span>
@@ -227,7 +221,6 @@ Preferred Contact: ${submittedData.bestTime}`;
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* 3. Email Address */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                   Email Address <span className="text-emerald-400">*</span>
@@ -242,7 +235,6 @@ Preferred Contact: ${submittedData.bestTime}`;
                 />
               </div>
 
-              {/* 4. Phone Number */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                   Phone / WhatsApp Number <span className="text-emerald-400">*</span>
@@ -259,7 +251,6 @@ Preferred Contact: ${submittedData.bestTime}`;
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* 5. Current Advertising Platform */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                   Current Advertising Platform <span className="text-emerald-400">*</span>
@@ -273,12 +264,11 @@ Preferred Contact: ${submittedData.bestTime}`;
                   <option value="Google Ads only">Google Ads only</option>
                   <option value="Meta Ads only">Meta Ads only</option>
                   <option value="Both Google Ads & Meta Ads">Both Google Ads &amp; Meta Ads</option>
-                  <option value="Other platform">Other platform (LinkedIn, TikTok, etc.)</option>
+                  <option value="Other platform">Other platform</option>
                   <option value="Not sure">Not sure</option>
                 </select>
               </div>
 
-              {/* 8. Current Monthly Ad Budget */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                   Current Monthly Ad Budget <span className="text-emerald-400">*</span>
@@ -298,7 +288,6 @@ Preferred Contact: ${submittedData.bestTime}`;
               </div>
             </div>
 
-            {/* 6. Main Challenge/Problem */}
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
@@ -323,7 +312,6 @@ Preferred Contact: ${submittedData.bestTime}`;
               />
             </div>
 
-            {/* 7. What Are Your Goals? Checkboxes */}
             <div>
               <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2.5">
                 What Are Your Goals? (Select all that apply)
@@ -336,7 +324,7 @@ Preferred Contact: ${submittedData.bestTime}`;
                       type="button"
                       key={goal}
                       onClick={() => handleGoalToggle(goal)}
-                      className={`text-left text-xs p-2.5 rounded-lg border transition-colors flex items-center gap-2 ${
+                      className={`text-left text-xs p-2.5 rounded-lg border transition-colors flex items-center gap-2 cursor-pointer ${
                         isSelected
                           ? 'bg-emerald-950/60 border-emerald-500/60 text-emerald-300 font-medium'
                           : 'bg-slate-900/60 border-slate-700 text-slate-400 hover:text-slate-200'
@@ -359,7 +347,6 @@ Preferred Contact: ${submittedData.bestTime}`;
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* 9. Best Time to Reach You */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                   Best Time to Reach You
@@ -373,7 +360,6 @@ Preferred Contact: ${submittedData.bestTime}`;
                 />
               </div>
 
-              {/* 10. How Did You Hear About Me? */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                   How Did You Hear About Me?
@@ -393,7 +379,6 @@ Preferred Contact: ${submittedData.bestTime}`;
               </div>
             </div>
 
-            {/* 11. Additional Information */}
             <div>
               <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                 Additional Information (Optional)
@@ -407,11 +392,10 @@ Preferred Contact: ${submittedData.bestTime}`;
               />
             </div>
 
-            {/* Form Submit Button */}
             <div className="pt-4">
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2.5 bg-[#27AE60] hover:bg-[#219653] text-white font-bold text-base py-4 px-8 rounded-lg shadow-xl shadow-emerald-950/50 transition-all duration-200 hover:scale-[1.01] active:scale-[0.99]"
+                className="w-full inline-flex items-center justify-center gap-2.5 bg-[#27AE60] hover:bg-[#219653] text-white font-bold text-base py-4 px-8 rounded-lg shadow-xl shadow-emerald-950/50 transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
                 <Send className="w-5 h-5" />
                 <span>Submit &amp; Schedule Free Consultation</span>

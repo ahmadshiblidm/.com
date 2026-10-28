@@ -186,7 +186,7 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
                 <button
                   type="button"
                   onClick={() => handleChoose(service.title)}
-                  className={`w-full inline-flex items-center justify-center gap-2 font-bold py-3 px-4 rounded-md text-sm transition-all duration-150 ${
+                  className={`w-full inline-flex items-center justify-center gap-2 font-bold py-3 px-4 rounded-md text-sm transition-all duration-150 cursor-pointer ${
                     service.popular
                       ? 'bg-[#27AE60] hover:bg-[#219653] text-white shadow hover:scale-[1.01]'
                       : 'bg-slate-900 hover:bg-slate-800 text-white'

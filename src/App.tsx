@@ -1,67 +1,75 @@
 import React, { useState } from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import WhyChooseMe from './components/WhyChooseMe';
-import GoogleAdsGuide from './components/GoogleAdsGuide';
-import AnalyticsGuide from './components/AnalyticsGuide';
-import AuditGuide from './components/AuditGuide';
-import ServicesSection from './components/ServicesSection';
-import ResultsSection from './components/ResultsSection';
-import LeadForm from './components/LeadForm';
-import CalendlySection from './components/CalendlySection';
-import ConnectSection from './components/ConnectSection';
-import FaqSection from './components/FaqSection';
-import Footer from './components/Footer';
+import Header from './components/Header.tsx';
+import Hero from './components/Hero.tsx';
+import WhyChooseMe from './components/WhyChooseMe.tsx';
+import GoogleAdsGuide from './components/GoogleAdsGuide.tsx';
+import AnalyticsGuide from './components/AnalyticsGuide.tsx';
+import AuditGuide from './components/AuditGuide.tsx';
+import ServicesSection from './components/ServicesSection.tsx';
+import ResultsSection from './components/ResultsSection.tsx';
+import CalendlySection from './components/CalendlySection.tsx';
+import LeadForm from './components/LeadForm.tsx';
+import ConnectSection from './components/ConnectSection.tsx';
+import FaqSection from './components/FaqSection.tsx';
+import Footer from './components/Footer.tsx';
+import FloatingContactWidget from './components/FloatingContactWidget.tsx';
+import LegalModals from './components/LegalModals.tsx';
 
 export default function App() {
-  const [selectedService, setSelectedService] = useState<string>('');
-
-  const handleSelectService = (serviceTitle: string) => {
-    setSelectedService(serviceTitle);
-  };
+  const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | null>(null);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-[#27AE60] selection:text-white">
-      {/* 1. Header Navigation */}
+    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-white relative">
+      {/* Top Navigation */}
       <Header />
 
-      {/* 2. Hero Section */}
+      {/* Main Page Flow */}
       <main className="flex-1">
+        {/* 1. Hero with Headshot & Trust Stats */}
         <Hero />
 
-        {/* 3. Why Choose Ahmad Shibli Section */}
+        {/* 2. Core Value Proposition & Comparison */}
         <WhyChooseMe />
 
-        {/* 4. Understanding Google Ads (Complete Guide) */}
+        {/* 3. Deep-Dive Strategy Guides */}
         <GoogleAdsGuide />
-
-        {/* 5. Analytics & GA4 Explained */}
         <AnalyticsGuide />
-
-        {/* 6. Google Ads Audit & Optimization Deep-Dive */}
         <AuditGuide />
 
-        {/* 7. Complete Service Offerings & Pricing */}
-        <ServicesSection onSelectService={handleSelectService} />
+        {/* 4. Specialized Services */}
+        <ServicesSection />
 
-        {/* 8. Results & Social Proof Case Studies */}
+        {/* 5. Proven Results & Case Studies */}
         <ResultsSection />
 
-        {/* 9. Interactive Problem Submission & Lead Capture Form */}
-        <LeadForm initialService={selectedService} />
-
-        {/* 10. Calendly Booking Section */}
+        {/* 6. Live Consultation Scheduling (Filled Interactive Widget) */}
         <CalendlySection />
 
-        {/* 11. Connect With Me (Direct Messaging Channels) */}
+        {/* 7. Comprehensive Audit Request Form */}
+        <LeadForm />
+
+        {/* 8. Direct Contact & Social Links (Icon-Only Handles) */}
         <ConnectSection />
 
-        {/* 12. Frequently Asked Questions */}
+        {/* 9. Frequently Asked Questions */}
         <FaqSection />
       </main>
 
-      {/* 13. Footer with Legal Policies */}
-      <Footer />
+      {/* Footer */}
+      <Footer 
+        onOpenPrivacy={() => setLegalModalType('privacy')}
+        onOpenTerms={() => setLegalModalType('terms')}
+      />
+
+      {/* Persistent Floating Contact Button (Bottom-Right WhatsApp & Telegram Direct) */}
+      <FloatingContactWidget />
+
+      {/* Privacy Policy & Terms Modals */}
+      <LegalModals
+        isOpen={legalModalType !== null}
+        type={legalModalType}
+        onClose={() => setLegalModalType(null)}
+      />
     </div>
   );
 }

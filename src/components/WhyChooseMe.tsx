@@ -81,11 +81,10 @@ export default function WhyChooseMe() {
           </p>
         </div>
 
-        {/* 5 Reasons Grid - Bento style layout */}
+        {/* 5 Reasons Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reasons.map((item, index) => {
             const Icon = item.icon;
-            const isMarquee = index === 0 || index === 4;
             return (
               <div
                 key={item.title}

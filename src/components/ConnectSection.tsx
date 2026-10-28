@@ -56,7 +56,6 @@ export default function ConnectSection() {
   return (
     <section id="contact" className="py-20 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <p className="text-sm font-semibold tracking-wide text-emerald-700 uppercase">
             Fast Direct Channels
@@ -69,7 +68,6 @@ export default function ConnectSection() {
           </p>
         </div>
 
-        {/* 4 Cards Grid - Logos Only, No Plaintext Handles */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {channels.map((ch) => (
             <a
@@ -104,7 +102,6 @@ export default function ConnectSection() {
           ))}
         </div>
 
-        {/* Direct Contact Banner */}
         <div className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md border border-slate-800">
           <div className="flex items-center gap-4 text-center sm:text-left">
             <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">

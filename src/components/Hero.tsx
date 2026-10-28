@@ -48,7 +48,7 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Social fast links indicator */}
+            {/* Trust markers */}
             <div className="pt-4 flex items-center justify-center lg:justify-start gap-4 text-xs text-slate-400">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" /> No long-term lock-in contracts
@@ -63,7 +63,6 @@ export default function Hero() {
           {/* Right Column: High Quality Portrait of Ahmad Shibli */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <div className="relative group max-w-sm sm:max-w-md w-full">
-              {/* Outer decorative glow */}
               <div className="absolute -inset-1.5 bg-gradient-to-tr from-emerald-500/30 to-sky-500/30 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition duration-300" />
 
               <div className="relative rounded-2xl overflow-hidden bg-slate-800 border border-slate-700/80 shadow-2xl">
@@ -74,7 +73,6 @@ export default function Hero() {
                   referrerPolicy="no-referrer"
                 />
 
-                {/* Scrim overlay at the base for clear text */}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent p-5 pt-12">
                   <div className="flex items-center justify-between">
                     <div>
@@ -110,7 +108,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Trust Badges Row (Below Hero) */}
+        {/* Trust Badges Row */}
         <div className="mt-16 pt-8 border-t border-slate-800/80 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-slate-800/40 border border-slate-800">
             <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />

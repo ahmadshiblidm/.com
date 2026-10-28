@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stethoscope, CheckCircle2, ArrowRight, TrendingUp, DollarSign, Layers, Search, Sparkles, Sliders, Target, ShieldCheck } from 'lucide-react';
+import { Stethoscope, CheckCircle2, ArrowRight, DollarSign, Layers, Search, Sparkles, Sliders, Target } from 'lucide-react';
 
 export default function AuditGuide() {
   const [activeStep, setActiveStep] = useState(0);
@@ -211,7 +211,7 @@ export default function AuditGuide() {
                   key={st.step}
                   type="button"
                   onClick={() => setActiveStep(i)}
-                  className={`text-left p-4 rounded-xl border transition-all duration-150 flex items-center justify-between ${
+                  className={`text-left p-4 rounded-xl border transition-all duration-150 flex items-center justify-between cursor-pointer ${
                     activeStep === i
                       ? 'bg-slate-900 text-white border-slate-900 shadow-md'
                       : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
@@ -271,7 +271,7 @@ export default function AuditGuide() {
           </div>
         </div>
 
-        {/* 6 Typical Optimizations We Implement */}
+        {/* 6 High-Impact Optimizations We Implement */}
         <div className="mb-20">
           <div className="text-center mb-10">
             <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
@@ -310,7 +310,7 @@ export default function AuditGuide() {
           </div>
         </div>
 
-        {/* Before vs After Audit Comparison Matrix (Tabular Math) */}
+        {/* Before vs After Audit Comparison Matrix */}
         <div className="bg-slate-900 text-white rounded-2xl p-8 sm:p-10 shadow-xl border border-slate-800 mb-16">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
@@ -406,7 +406,6 @@ export default function AuditGuide() {
             </div>
           </div>
 
-          {/* Real client case callout */}
           <div className="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-xs sm:text-sm text-slate-300">
               <strong className="text-white">Client Showcase:</strong> Consumer Electronics Store — Kept spend fixed at $3,000/mo while increasing sales from 60 to 85 (+42% revenue increase to $70,000/mo).

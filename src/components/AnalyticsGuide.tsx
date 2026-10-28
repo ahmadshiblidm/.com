@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, Activity, Route, DollarSign, AlertTriangle, CheckCircle, TrendingDown, HelpCircle, Layers } from 'lucide-react';
+import { Compass, Activity, Route, DollarSign, AlertTriangle, CheckCircle, TrendingDown, Layers } from 'lucide-react';
 
 export default function AnalyticsGuide() {
   const metrics = [

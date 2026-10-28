@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { FaqItem } from '../types';
 
 export default function FaqSection() {
@@ -65,7 +65,6 @@ export default function FaqSection() {
   return (
     <section id="faq" className="py-20 bg-slate-50 border-b border-slate-200">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <div className="text-center mb-14">
           <p className="text-sm font-semibold tracking-wide text-emerald-700 uppercase">
             Clear Answers
@@ -78,7 +77,6 @@ export default function FaqSection() {
           </p>
         </div>
 
-        {/* FAQs Accordion */}
         <div className="space-y-3">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
@@ -90,7 +88,7 @@ export default function FaqSection() {
                 <button
                   type="button"
                   onClick={() => toggle(index)}
-                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 cursor-pointer"
                   aria-expanded={isOpen}
                 >
                   <span className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
@@ -116,7 +114,6 @@ export default function FaqSection() {
           })}
         </div>
 
-        {/* Question Still Unanswered? */}
         <div className="mt-12 text-center p-6 bg-white rounded-xl border border-slate-200">
           <h4 className="text-sm font-bold text-slate-900 mb-1">
             Have a Specific Question About Your Account?

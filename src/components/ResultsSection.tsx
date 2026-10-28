@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrendingDown, TrendingUp, Percent, Quote, Building2, ShoppingBag, Wrench, CheckCircle } from 'lucide-react';
+import { ShoppingBag, Building2, Wrench, CheckCircle, Quote } from 'lucide-react';
 
 export default function ResultsSection() {
   const cases = [

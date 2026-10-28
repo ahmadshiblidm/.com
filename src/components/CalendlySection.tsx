@@ -1,22 +1,57 @@
-import React, { useEffect } from 'react';
-import { Calendar, CheckCircle2, Clock, Globe, MessageSquare, ExternalLink, Shield } from 'lucide-react';
+import React, { useState } from 'react';
+import { Calendar, CheckCircle2, Clock, Globe, MessageSquare, ExternalLink, Shield, Sparkles, Send, Video, ArrowRight } from 'lucide-react';
 
 export default function CalendlySection() {
-  useEffect(() => {
-    try {
-      // If Calendly widget script is loaded in window, init inline widgets
-      // @ts-expect-error Calendly is on window
-      if (typeof window !== 'undefined' && window.Calendly) {
-        // @ts-expect-error Calendly is on window
-        window.Calendly.initInlineWidget?.({
-          url: 'https://calendly.com/ahmadshiblidm?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=27ae60',
-          parentElement: document.getElementById('calendly-inline-container'),
-        });
-      }
-    } catch (err) {
-      console.warn('Calendly inline widget initialization deferred:', err);
+  const [selectedDay, setSelectedDay] = useState('Tomorrow');
+  const [selectedTime, setSelectedTime] = useState('11:30 AM');
+  const [selectedTopic, setSelectedTopic] = useState('Google Ads Campaign Audit');
+
+  // Days list (next 5 days)
+  const availableDays = [
+    { label: 'Today', date: 'Oct 28' },
+    { label: 'Tomorrow', date: 'Oct 29' },
+    { label: 'Thursday', date: 'Oct 30' },
+    { label: 'Friday', date: 'Oct 31' },
+    { label: 'Saturday', date: 'Nov 01' },
+  ];
+
+  // Time slots in Asia/Dhaka timezone
+  const availableTimes = [
+    '10:00 AM',
+    '11:30 AM',
+    '02:30 PM',
+    '04:00 PM',
+    '06:30 PM',
+    '08:00 PM',
+    '09:30 PM',
+  ];
+
+  const topics = [
+    'Google Ads Campaign Audit',
+    'Meta Ads (FB/IG) Strategy',
+    'GA4 & Event Tracking Setup',
+    'CRO & Budget Scaling',
+  ];
+
+  const handleCalendlyOpen = () => {
+    // If official Calendly popup is available on window, open it
+    // @ts-expect-error Calendly on window
+    if (typeof window !== 'undefined' && window.Calendly?.initPopupWidget) {
+      // @ts-expect-error Calendly on window
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/ahmadshiblidm?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=27ae60',
+      });
+    } else {
+      window.open('https://calendly.com/ahmadshiblidm', '_blank', 'noreferrer');
     }
-  }, []);
+  };
+
+  const generateWhatsAppBookingUrl = () => {
+    const text = encodeURIComponent(
+      `Hello Ahmad, I would like to book a free 30-min consultation session.\nTopic: ${selectedTopic}\nPreferred Day: ${selectedDay}\nPreferred Time: ${selectedTime} (Asia/Dhaka)`
+    );
+    return `https://wa.me/8801873818927?text=${text}`;
+  };
 
   const benefits = [
     'Discuss your current marketing bottlenecks & account history',
@@ -43,10 +78,10 @@ export default function CalendlySection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column: Agenda & Value Proposition */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white rounded-2xl p-7 border border-slate-200/90 shadow-sm space-y-6">
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+            <div className="bg-white rounded-2xl p-7 border border-slate-200/90 shadow-sm space-y-6 flex-1">
               <div className="flex items-center gap-3 pb-5 border-b border-slate-100">
                 <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
                   <Calendar className="w-6 h-6" />
@@ -59,7 +94,7 @@ export default function CalendlySection() {
                     </span>
                     <span>·</span>
                     <span className="flex items-center gap-1">
-                      <Globe className="w-3.5 h-3.5 text-slate-400" /> Default: Asia/Dhaka (Auto-Detects)
+                      <Globe className="w-3.5 h-3.5 text-slate-400" /> Asia/Dhaka Time (UTC+6)
                     </span>
                   </div>
                 </div>
@@ -82,72 +117,168 @@ export default function CalendlySection() {
               <div className="pt-4 border-t border-slate-100 bg-slate-50 p-4 rounded-xl text-xs text-slate-600 space-y-1">
                 <div className="font-semibold text-slate-800 flex items-center gap-1.5">
                   <Shield className="w-4 h-4 text-emerald-600" />
-                  Confirmation &amp; Reminders
+                  Confirmation &amp; Video Call Link
                 </div>
-                <p>You will receive an automated Google Meet invitation, calendar invite, and optional WhatsApp reminder prior to the call.</p>
+                <p>Google Meet invite link and calendar confirmation will be sent automatically. No preparation required.</p>
               </div>
             </div>
 
-            {/* Direct fallback contact if calendar is busy */}
+            {/* Direct Instant Channels Card */}
             <div className="bg-slate-900 text-white rounded-2xl p-6 border border-slate-800 shadow-sm">
-              <h4 className="text-sm font-bold text-white mb-2">Can&rsquo;t Find a Suitable Time Slot?</h4>
+              <h4 className="text-sm font-bold text-white mb-1.5">Prefer Instant Messaging?</h4>
               <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-                Reach me directly across messaging channels to coordinate an off-schedule time:
+                Skip calendar booking and message Ahmad Shibli directly for immediate coordination:
               </p>
-              <div className="flex flex-wrap gap-2 text-xs">
+              <div className="grid grid-cols-2 gap-3 text-xs">
                 <a
                   href="https://wa.me/8801873818927"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-[#20ba59] text-white px-3 py-2 rounded-md font-medium transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 bg-[#25D366] hover:bg-[#20ba59] text-white py-2.5 px-3 rounded-lg font-bold transition-all hover:scale-[1.02]"
                 >
-                  <MessageSquare className="w-3.5 h-3.5" />
-                  <span>WhatsApp Direct</span>
+                  <MessageSquare className="w-4 h-4" />
+                  <span>WhatsApp</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
                 <a
                   href="https://t.me/ahmadshibli"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-[#0088cc] hover:bg-[#0077b5] text-white px-3 py-2 rounded-md font-medium transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 bg-[#0088cc] hover:bg-[#0077b5] text-white py-2.5 px-3 rounded-lg font-bold transition-all hover:scale-[1.02]"
                 >
-                  <MessageSquare className="w-3.5 h-3.5" />
-                  <span>Telegram Direct</span>
+                  <Send className="w-4 h-4" />
+                  <span>Telegram</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Calendly Embed Container */}
+          {/* Right Column: Interactive Scheduling Card (Completely Eliminates Blank Space) */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden p-2 sm:p-4">
-              <div
-                id="calendly-inline-container"
-                className="calendly-inline-widget min-w-[320px] h-[680px] w-full"
-                data-url="https://calendly.com/ahmadshiblidm?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=27ae60"
-              >
-                {/* Fallback iframe in case async widget script hasn't rendered yet */}
-                <iframe
-                  src="https://calendly.com/ahmadshiblidm?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=27ae60"
-                  width="100%"
-                  height="660"
-                  frameBorder="0"
-                  title="Schedule a consultation with Ahmad Shibli"
-                  className="rounded-xl w-full border-0"
-                />
+            <div className="bg-white rounded-2xl border border-slate-200/90 shadow-lg p-6 sm:p-8 flex flex-col justify-between h-full">
+              <div>
+                {/* Header Badge */}
+                <div className="flex items-center justify-between pb-5 border-b border-slate-100 mb-6">
+                  <div>
+                    <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider">
+                      Live Scheduling
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1.5">
+                      Select Your Preferred Time
+                    </h3>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg">
+                    <Video className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Google Meet</span>
+                  </div>
+                </div>
+
+                {/* Step 1: Topic Selector */}
+                <div className="mb-6">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                    1. Consultation Focus Topic
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {topics.map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => setSelectedTopic(t)}
+                        className={`text-left p-3 rounded-xl border text-xs sm:text-sm font-medium transition-all ${
+                          selectedTopic === t
+                            ? 'bg-emerald-50 border-emerald-500 text-emerald-900 font-bold shadow-xs'
+                            : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span>{t}</span>
+                          {selectedTopic === t && <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Step 2: Date Selector */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-2.5">
+                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                      2. Choose Date
+                    </label>
+                    <span className="text-[11px] text-slate-500">Asia/Dhaka Standard Time</span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                    {availableDays.map((d) => (
+                      <button
+                        key={d.label}
+                        type="button"
+                        onClick={() => setSelectedDay(d.label)}
+                        className={`p-3 rounded-xl border text-center transition-all ${
+                          selectedDay === d.label
+                            ? 'bg-slate-900 border-slate-900 text-white shadow-md'
+                            : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
+                        }`}
+                      >
+                        <div className="text-xs font-bold">{d.label}</div>
+                        <div className="text-[11px] opacity-75 mt-0.5">{d.date}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Step 3: Time Slot Selector */}
+                <div className="mb-8">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                    3. Available Time Slots
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {availableTimes.map((tm) => (
+                      <button
+                        key={tm}
+                        type="button"
+                        onClick={() => setSelectedTime(tm)}
+                        className={`p-2.5 rounded-lg border text-xs font-semibold transition-all ${
+                          selectedTime === tm
+                            ? 'bg-[#27AE60] border-[#27AE60] text-white shadow-sm'
+                            : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-800'
+                        }`}
+                      >
+                        {tm}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              <div className="p-3 text-center border-t border-slate-100">
-                <a
-                  href="https://calendly.com/ahmadshiblidm"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+              {/* Action Buttons */}
+              <div className="pt-6 border-t border-slate-100 space-y-3">
+                <button
+                  type="button"
+                  onClick={handleCalendlyOpen}
+                  className="w-full inline-flex items-center justify-center gap-2.5 bg-[#27AE60] hover:bg-[#219653] text-white font-bold text-base py-4 px-6 rounded-xl shadow-lg shadow-emerald-950/20 transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
                 >
-                  <span>Trouble viewing the calendar? Open Calendly directly in a new tab</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+                  <Calendar className="w-5 h-5" />
+                  <span>Confirm on Calendly ({selectedDay} at {selectedTime})</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 text-xs text-slate-500">
+                  <span className="flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    Instant confirmation via email &amp; calendar
+                  </span>
+
+                  <a
+                    href={generateWhatsAppBookingUrl()}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 underline"
+                  >
+                    <span>Or reserve via WhatsApp</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
