@@ -96,7 +96,7 @@ export default function LegalModals({ isOpen, type, onClose }: LegalModalProps) 
               <div>
                 <h4 className="font-semibold text-slate-900 mb-1">5. Data Retention &amp; Removal</h4>
                 <p>
-                  You can request the immediate deletion of your submitted contact details, audit notes, or historical performance summaries at any time by messaging <span className="font-medium text-slate-800">ahmadshiblidm@gmail.com</span>.
+                  You can request the immediate deletion of your submitted contact details, audit notes, or historical performance summaries at any time by messaging <span className="font-medium text-slate-800">ahmadshibli927@gmail.com</span>.
                 </p>
               </div>
             </>

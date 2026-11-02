@@ -97,7 +97,7 @@ export default function Footer({ onOpenPrivacy, onOpenTerms }: FooterProps) {
 
               {/* Email icon */}
               <a
-                href="mailto:ahmadshiblidm@gmail.com"
+                href="mailto:ahmadshibli927@gmail.com"
                 aria-label="Send Email"
                 className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-rose-400 hover:border-rose-400/40 hover:bg-slate-800 transition-all"
               >
